@@ -4,7 +4,7 @@ metadata:
   name: aspnet-configmap
 spec:
   containers:
-  - image: microsoft/aspnet:4.7.1-windowsservercore-1709
+  - image: microsoft/aspnet:4.7.2-windowsservercore-1803
     name: aspnet-configmap
     env:
       - name: SPECIAL_LEVEL_KEY
@@ -12,3 +12,12 @@ spec:
           configMapKeyRef:
             name: special-config
             key: special.how
+    volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+        name: special-config

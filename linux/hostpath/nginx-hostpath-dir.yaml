@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-hostpath
+spec:
+  containers:
+  - image: nginx
+    name: nginx-hostpath
+    volumeMounts:
+    - name: test-volume
+      mountPath: /mnt/hostpath
+    - name: etc-k8s-dir
+      mountPath: /etc/kubernetes/    
+  volumes:
+  - name: test-volume
+    hostPath:
+      path: /mnt
+      type: Directory
+  - name: etc-k8s-dir     
+    hostPath:
+      path: /etc/kubernetes/
+      type: Directory

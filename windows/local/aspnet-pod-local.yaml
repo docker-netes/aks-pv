@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: aspnet-local
+spec:
+  containers:
+  - image: microsoft/aspnet:4.7.2-windowsservercore-1803
+    name: aspnet-local
+    volumeMounts:
+    - name: data-volume
+      mountPath: /data
+  nodeSelector:
+    beta.kubernetes.io/os: windows
+  volumes:
+  - name: data-volume
+    persistentVolumeClaim:
+      claimName: pvc-local
